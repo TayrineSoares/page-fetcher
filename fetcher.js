@@ -21,4 +21,3 @@ needle.get(url, (error, response) => {
     console.log('Body:', response.body); // Prints the content of the website
   }
 });
-
