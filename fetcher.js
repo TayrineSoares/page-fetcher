@@ -15,26 +15,27 @@
 
 
 const needle = require('needle');
-const fs = require('fs'); // for writing files 
-
+const fs = require('fs'); // for writing files
 
 // taking arguments from the command line
 const args = process.argv;
 const url = args[2];
-const filePath = args[3]; 
+const filePath = args[3];
 
 // creating the connection using needle library
 needle.get(url, (error, response) => {
   if (error) {
     console.error('Error:', error);
   } else {
-    // assuming theres is no error, so writing the file
+    // assuming theres is no error, receives a response
+    // then writes the file
     fs.writeFile('./index.html', response.body, err => {
       if (err) {
         console.error("Error writing file:", err);
       } else {
+        // 1 character is equal to 1 byte, so file size is file length
         const fileSize = response.body.length;
-        console.log(`Downloaded and saved.`);
+        console.log(`Downloaded and saved ${fileSize} bytes to ${filePath}.`);
       }
     });
   }
